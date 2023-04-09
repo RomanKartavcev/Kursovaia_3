@@ -2,28 +2,28 @@ import json
 from datetime import datetime
 
 
+
 def get_data():
+    """ Импортируем данные из json файла"""
     with open('operations.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
     return data
 
-
-def get_filtered_data(data, filtered_empty_from=None):
-    data = [x for x in data if 'state' in x and x['state'] == 'EXECUTED']
-    if filtered_empty_from:
-        data = [x for x in data if 'from' in x]
+def get_filtered_data(data):
+    """ функция получения данных по фильтру"""
+    data = [x for x in data if 'state' in x and x['state'] =='EXECUTED']
     return data
 
-
 def get_last_values(data, count_values):
-    data = sorted(data, key=lambda x: "x['date']", reverse=True)
+    """ функция сортировки данных по дате"""
+    data = sorted(data, key=lambda x: x['date'], reverse=True)
     return data[:count_values]
 
-
 def get_formated_data(data):
-    formated_data = []
+    """ функция получения форматированных данных """
+    formatted_data = []
     for row in data:
-        date = datetime.strptime(row['date'], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
+        date = datetime.strptime(row["date"], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
         description = row["description"]
         if "from" in row:
             sender = row["from"].split()
@@ -37,8 +37,8 @@ def get_formated_data(data):
         recipient_bill = f"**{recipient_bill[-4:]}"
         to_info = ' '.join(recipient)
         amount = f"{row['operationAmount']['amount']} {row['operationAmount']['currency']['name']}"
-        formated_data.append(f"""
+        formatted_data.append(f"""
 {date} {description} 
 {from_info} {from_bill} -> {to_info} {recipient_bill}
 {amount}""")
-    return formated_data
+    return formatted_data
