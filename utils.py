@@ -2,35 +2,28 @@ import json
 from datetime import datetime
 
 
+
 def get_data():
     """ Импортируем данные из json файла"""
     with open('operations.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
     return data
 
-
 def get_filtered_data(data):
     """ функция получения данных по фильтру"""
     data = [x for x in data if 'state' in x and x['state'] =='EXECUTED']
     return data
-
-def get_filtered_data(data):
-    """ функция получения данных по фильтру"""
-    data = [x for x in data if 'state' in x and x['state'] == 'EXECUTED']
-    return data
-
 
 def get_last_values(data, count_values):
     """ функция сортировки данных по дате"""
     data = sorted(data, key=lambda x: x['date'], reverse=True)
     return data[:count_values]
 
-
 def get_formated_data(data):
     """ функция получения форматированных данных """
     formatted_data = []
     for row in data:
-        date = datetime.strptime(row['date'], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
+        date = datetime.strptime(row["date"], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
         description = row["description"]
         if "from" in row:
             sender = row["from"].split()
