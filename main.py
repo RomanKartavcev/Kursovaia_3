@@ -13,5 +13,6 @@ def main():
     for row in data:
         print(row, end='\n')
 
+
 if __name__ == '__main__':
     main()
