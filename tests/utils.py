@@ -8,10 +8,8 @@ def get_data():
     return data
 
 
-def get_filtered_data(data, filtered_empty_from=None):
+def get_filtered_data(data):
     data = [x for x in data if 'state' in x and x['state'] == 'EXECUTED']
-#    if filtered_empty_from:
-#        data = [x for x in data if 'from' in x]
     return data
 
 

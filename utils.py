@@ -11,11 +11,6 @@ def get_data():
 
 def get_filtered_data(data):
     """ функция получения данных по фильтру"""
-    data = [x for x in data if 'state' in x and x['state'] =='EXECUTED']
-    return data
-
-def get_filtered_data(data):
-    """ функция получения данных по фильтру"""
     data = [x for x in data if 'state' in x and x['state'] == 'EXECUTED']
     return data
 

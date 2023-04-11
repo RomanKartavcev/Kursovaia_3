@@ -1,7 +1,5 @@
-import pytest
 from utils import get_data
 from utils import get_filtered_data, get_last_values, get_formated_data
-
 
 def test_get_data():
     """ Тестирование получения данных"""
@@ -11,8 +9,8 @@ def test_get_data():
 
 def test_filtered_data(test_data):
     """ Тестирование фильтрации данных"""
-    assert len(get_filtered_data(test_data, filtered_empty_from=False)) == 3
-    assert len(get_filtered_data(test_data, filtered_empty_from=True)) == 3
+    assert len(get_filtered_data(test_data)) == 3
+    assert len(get_filtered_data(test_data)) == 3
 
 
 def test_get_last_values(test_data):
